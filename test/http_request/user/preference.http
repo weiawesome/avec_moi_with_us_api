@@ -1,0 +1,15 @@
+#### Get Preference
+GET {{BASE_URL}}/api/v1/user/preference
+Authorization: Bearer {{EXAMPLE_JWT}}
+
+### Edit Preference
+POST {{BASE_URL}}/api/v1/user/preference
+Authorization: Bearer {{EXAMPLE_JWT}}
+Content-Type: application/json
+
+{
+  "genres": {{EXAMPLE_GENRES}}
+}
+
+### All Preference
+GET {{BASE_URL}}/api/v1/user/preference/type

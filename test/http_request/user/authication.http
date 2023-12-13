@@ -1,0 +1,31 @@
+### Signup
+POST {{BASE_URL}}/api/v1/user/signup
+Content-Type: application/json
+
+{
+  "gender": "{{EXAMPLE_GENDER}}",
+  "mail": "{{EXAMPLE_MAIL}}",
+  "password": "{{EXAMPLE_PASSWORD}}",
+  "name": "{{EXAMPLE_NAME}}"
+}
+
+### Login
+POST {{BASE_URL}}/api/v1/user/login
+Content-Type: application/json
+
+{
+  "mail": "Tcweeei@gmail.com",
+  "password": "123456789"
+}
+
+### Logout
+DELETE {{BASE_URL}}/api/User/logout
+Authorization: Bearer {{EXAMPLE_JWT}}
+
+### Auth
+POST {{BASE_URL}}/api/v1/user/auth/firebase
+Content-Type: application/json
+
+{
+  "id_token": "GrtSZgSmK1TvRDtnefClbLmgxy23"
+}

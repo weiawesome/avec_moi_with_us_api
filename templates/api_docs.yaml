@@ -1,0 +1,1065 @@
+openapi: 3.0.3
+info:
+  title: API Documentation of Avec Moi With Us.
+  description: The API document for the Avec Moi With Us.
+  version: 1.0.0
+servers:
+  - url: 'https://tcweeei.study-savvy.com'
+tags:
+  - name: user
+    description: The actions about user.
+  - name: movie
+    description: The actions about movie.
+
+paths:
+  /api/v1/user:
+    get:
+      description: "The method to get the user information."
+      tags:
+        - user
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: "Success to get the user information."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user_information_response"
+        "400":
+          description: "Fail to login application with wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Fail to get account information due to unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "Fail to get account information due to JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/user/auth/firebase:
+    post:
+      description: "The method to into application by firebase."
+      tags:
+        - user
+      requestBody:
+        description: "The auth content for into the application."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user_auth_request"
+      responses:
+        '200':
+          description: "Success to login application."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user_login_response"
+        "400":
+          description: "Fail to login application with wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/user/login:
+    post:
+      description: "The method to login the application."
+      tags:
+        - user
+      requestBody:
+        description: "The content for login the application."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user_login_request"
+      responses:
+        '200':
+          description: "Success to login application."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user_login_response"
+        "400":
+          description: "Fail to login application with wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Wrong email or password."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/user/signup:
+    post:
+      description: "To sign up an account for the application."
+      tags:
+        - user
+      requestBody:
+        description: "The content for sign up."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user_signup_request"
+      responses:
+        "200":
+          description: "Success to sign up."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_success_empty"
+        "400":
+          description: "Fail to sign up with wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "409":
+          description: "Fail to sign up due to have been registered."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/user/edit_info:
+    put:
+      description: "To edit personal information."
+      tags:
+        - user
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: "The content for the edit personal information."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user_edit_info_request"
+      responses:
+        "200":
+          description: "Success to edit personal information."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_success_empty"
+        "400":
+          description: "Fail to edit personal information due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Without the right access."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/user/edit_password:
+    put:
+      description: "To edit personal information."
+      tags:
+        - user
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        description: "The content for the edit personal information."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user_edit_password_request"
+      responses:
+        "200":
+          description: "Success to edit personal information."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_success_empty"
+        "400":
+          description: "Fail to edit personal information due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Without the right access."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/user/logout:
+    delete:
+      description: "To logout the account."
+      tags:
+        - user
+      security:
+        - BearerAuth: []
+      responses:
+        "204":
+          description: "Success to logout account."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_success_empty"
+        "400":
+          description: "Fail to delete account due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Fail to delete account due to unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "Fail to delete account due to JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/user/prefernce:
+    get:
+      description: "To edit personal information."
+      tags:
+        - user
+      security:
+        - BearerAuth: [ ]
+      responses:
+        "200":
+          description: "Success to edit personal information."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user_preference_response"
+        "400":
+          description: "Fail to edit personal information due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Without the right access."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+    post:
+      description: "To edit personal information."
+      tags:
+        - user
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        description: "The content for the edit personal information."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user_edit_preference_request"
+      responses:
+        "200":
+          description: "Success to edit personal information."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_success_empty"
+        "400":
+          description: "Fail to edit personal information due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Without the right access."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/user/prefernce/type:
+    get:
+      description: "To get all preferences type."
+      tags:
+        - user
+      responses:
+        "200":
+          description: "Success to get all preferences type."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user_preference_response"
+        "400":
+          description: "Fail to edit personal information due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+
+
+  /api/v1/movie:
+    get:
+      description: "To get the movies."
+      tags:
+        - movie
+      parameters:
+        - name: page
+          in: query
+          description: The page number to get the content. The page number default to 1.
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: random_seed
+          in: query
+          description: The random seed to get movie
+          required: false
+          schema:
+            type: integer
+            default: 0
+            maximum: 100
+      responses:
+        "200":
+          description: "Success to get movies."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/movie_response"
+        "400":
+          description: "Fail to get movies due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/movie/{movie_id}:
+    get:
+      description: "To get the specific movie."
+      tags:
+        - movie
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: movie_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+            description: The movie's id.
+      responses:
+        "200":
+          description: "Success to get specific movie."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/movie_specific_response"
+        "400":
+          description: "Fail to get specific movie due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "404":
+          description: "Fail to get the movie due to not finding resource."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "Fail to get the movies due to JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/movie/recently_hot:
+    get:
+      description: "To get the movies recently hot."
+      tags:
+        - movie
+      parameters:
+        - name: page
+          in: query
+          description: The page number to get the content. The page number default to 1.
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+      responses:
+        "200":
+          description: "Success to get recently hot movies."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/movie_response"
+        "400":
+          description: "Fail to get recently hot movie due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/movie/recently_view:
+    get:
+      description: "To get the recently view movies."
+      tags:
+        - movie
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: page
+          in: query
+          description: The page number to get the content. The page number default to 1.
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+      responses:
+        "200":
+          description: "Success to get recently view movies."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/movie_response"
+        "400":
+          description: "Fail to get the recently view movies due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Fail to get the recently view movies due to unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "Fail to get the recently view movies due to JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/movie/recommend:
+    get:
+      description: "To get the recommend movies."
+      tags:
+        - movie
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: "Success to get recommend movies."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/movie_response"
+        "400":
+          description: "Fail to get the recommend movies due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Fail to get the recommend movies due to unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "Fail to get the recommend movies due to JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/movie/like:
+    get:
+      description: "To get the movies have been liked."
+      tags:
+        - movie
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          description: The page number to get the content. The page number default to 1.
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+      responses:
+        "200":
+          description: "Success to get the like movies."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/movie_response"
+        "400":
+          description: "Fail to get the like movies due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Fail to get like movies due to unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "Fail to get like movies due to JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/movie/like/{movie_id}:
+    get:
+      description: "To get a movie like or not."
+      tags:
+        - movie
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: movie_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+            description: The movie's id.
+      responses:
+        "200":
+          description: "User like the movie."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_success_empty"
+        "400":
+          description: "Fail to get a movie like or not due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Fail to get a movie like or not due to unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "404":
+          description: "User not like the movie."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "Fail to get a movie like or not due to JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+    post:
+      description: "To like a movie."
+      tags:
+        - movie
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: movie_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+            description: The movie's id.
+      responses:
+        "200":
+          description: "Success to add a movie to like."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/movie_response"
+        "400":
+          description: "Fail to add a movie to like due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Fail to add a movie to like due to unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "404":
+          description: "Fail to add a movie to like due to not found resource."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "Fail to add a movie to like due to JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+    delete:
+      description: "To unlike the movie."
+      tags:
+        - movie
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: movie_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+            description: The movie's id.
+      responses:
+        "204":
+          description: "Success to remove a movie to like."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_success_empty"
+        "400":
+          description: "Fail to remove a movie to like due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "401":
+          description: "Fail to remove a movie to like due to unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "404":
+          description: "Fail to remove a movie to like due to not found resource."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "422":
+          description: "Fail to remove a movie to like due to JWT unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+  /api/v1/movie/search:
+    get:
+      description: "To search the movies."
+      tags:
+        - movie
+      parameters:
+        - name: content
+          in: query
+          description: The content user search.
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page number to get the content. The page number default to 1.
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+      responses:
+        "200":
+          description: "Success to search movies."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/movie_response"
+        "400":
+          description: "Fail to search movies due to wrong parameters."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+        "500":
+          description: "Server happened unknown error."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_fail"
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    user_information_response:
+      type: object
+      description: "Success to get personal information."
+      properties:
+        mail:
+          description: "The user's email."
+          type: string
+          format: email
+        name:
+          description: "The user's name."
+          type: string
+        gender:
+          description: "The user's gender."
+          type: string
+          enum:
+            - "male"
+            - "female"
+            - "other"
+          default: "other"
+    user_auth_request:
+      type: object
+      description: The parameters for login.
+      properties:
+        id_token:
+          description: "The token to represent user."
+          type: string
+      example:
+        id_token: "ExampleIdToken"
+
+    user_login_request:
+      type: object
+      description: The parameters for login.
+      properties:
+        mail:
+          description: "The user's email."
+          type: string
+          format: email
+        password:
+          description: "The user's password."
+          type: string
+          minLength: 8
+          maxLength: 30
+          pattern: '^(?!.*\s).{8,}$'
+      example:
+        mail: "Example@example.com"
+        password: "ExamplePassword"
+    user_login_response:
+      type: object
+      description: "Success to login."
+      properties:
+        token:
+          type: string
+          description: "The JWT token for the user."
+    user_signup_request:
+      type: object
+      description: The parameters got signup.
+      properties:
+        mail:
+          description: "The user's email."
+          type: string
+          format: email
+        password:
+          description: "The user's password."
+          type: string
+          minLength: 8
+          maxLength: 30
+          pattern: '^(?!.*\s).{8,}$'
+        name:
+          description: "The user's name."
+          type: string
+        gender:
+          description: "The user's gender."
+          type: string
+          enum:
+            - "male"
+            - "female"
+            - "other"
+          default: "other"
+    user_edit_info_request:
+      type: object
+      description: "The parameters for edit personal information."
+      properties:
+        name:
+          description: "The user's name."
+          type: string
+        gender:
+          description: "The user's gender."
+          type: string
+          enum:
+            - "male"
+            - "female"
+            - "other"
+    user_edit_password_request:
+      type: object
+      properties:
+        current_password:
+          type: string
+          minLength: 8
+          maxLength: 30
+          description: User's original password (should not contain spaces and be at least 8 characters long and less than 30 characters long).
+          pattern: '^(?!.*\s).{8,}$'
+        edit_password:
+          type: string
+          minLength: 8
+          maxLength: 30
+          description: User's new password (should not contain spaces and be at least 8 characters long and less than 30 characters long).
+          pattern: '^(?!.*\s).{8,}$'
+      example:
+        current_password: "ExampleCurrentPassword"
+        edit_password: "ExampleEditPassword"
+    user_edit_preference_request:
+      type: object
+      properties:
+        genres:
+          type: array
+          items:
+            description: "The id of the preference."
+            type: integer
+      example:
+        current_password: "ExampleCurrentPassword"
+        edit_password: "ExampleEditPassword"
+    preference_pair:
+      description: "The pair information of the preference."
+      type: object
+      properties:
+        id:
+          type: integer
+          description: "The id of the preference."
+        value:
+          type: string
+          description: "The value of the preference."
+      example:
+        id: 0
+        value: "Example Preference."
+    user_preference_response:
+      description: "The response content is empty."
+      type: object
+      properties:
+        pair:
+          description: "The pair of the preference."
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/preference_pair"
+
+    movie:
+      type: object
+      description: "The movie's information."
+      properties:
+        movie_id:
+          description: "The id of the movie."
+          type: string
+          format: uuid
+        resource:
+          description: "The photo of the movie."
+          type: string
+        release_year:
+          description: "The year of the movie released."
+          type: string
+        rank_score:
+          description: "The score of the movie."
+          type: number
+        titles:
+          description: "The names of the movie."
+          type: array
+          items:
+            description: "The movie's name."
+            type: string
+    movie_response:
+      description: "The list of movie."
+      type: object
+      properties:
+        total_pages:
+          description: "The whole page of the content."
+          type: integer
+        current_page:
+          description: "The current page in the content."
+          type: integer
+        movies:
+          description: "The movie list."
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/movie"
+    movie_specific_response:
+      description: "The specific movie's information."
+      allOf:
+        - $ref: "#/components/schemas/movie"
+      type: object
+      properties:
+        introduction:
+          description: "The introduction for the movie."
+          type: string
+        rank_scores:
+          description: "All of the rank score."
+          type: array
+          items:
+            properties:
+              score:
+                description: "The movie's score."
+                type: number
+              organization:
+                description: "The organization rank the movie."
+                type: string
+        categories:
+          description: "The types of the movie."
+          type: array
+          items:
+            description: "The movie's type."
+            type: string
+
+    response_success_empty:
+      description: "The response content is empty."
+      type: object
+    response_fail:
+      description: "The result of the request is fail."
+      type: object
+      properties:
+        reason:
+          type: string
+          description: "To describe the fail reason."
+
+
+
+

@@ -1,0 +1,26 @@
+### All Movies
+GET {{BASE_URL}}/api/v1/movie?page={{EXAMPLE_PAGE}}
+
+### Filter Movies
+GET {{BASE_URL}}/api/v1/movie?page={{EXAMPLE_PAGE}}&filter={{}}
+
+### Random Movies
+GET {{BASE_URL}}/api/v1/movie?page={{EXAMPLE_PAGE}}&random_seed={{EXAMPLE_RANDOM_SEED}}
+
+### Search Movies
+GET {{BASE_URL}}/api/v1/movie/search?page=2&content=AA
+
+### Specific Movies
+GET {{BASE_URL}}/api/v1/movie/00f1073b-d148-4757-8489-49e20730e5ba
+Authorization: Bearer {{EXAMPLE_JWT}}
+
+### Recently Hot Movies
+GET {{BASE_URL}}/api/v1/movie/recently_hot?page=2
+
+### Recently View Movies
+GET {{BASE_URL}}/api/v1/movie/recently_view?page=2
+Authorization: Bearer {{EXAMPLE_JWT}}
+
+### Recommend Movies
+GET {{BASE_URL}}/api/v1/movie/recommend
+Authorization: Bearer {{EXAMPLE_JWT}}

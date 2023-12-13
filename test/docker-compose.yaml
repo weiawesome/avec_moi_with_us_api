@@ -1,0 +1,69 @@
+version: '1'
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass DefaultPassword
+    volumes:
+      - redis_data:/data
+
+  mysql:
+    restart: always
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - my_sql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=DefaultPassword
+      - MYSQL_USER=DefaultUser
+      - MYSQL_PASSWORD=DefaultPassword
+      - MYSQL_DATABASE=DefaultDb
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=DefaultUser
+      - GF_SECURITY_ADMIN_PASSWORD=DefaultPassword
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+  influxdb:
+    image: influxdb:latest
+    ports:
+      - "8086:8086"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=DefaultUser
+      - DOCKER_INFLUXDB_INIT_PASSWORD=DefaultPassword
+      - DOCKER_INFLUXDB_INIT_ORG=DefaultOrg
+      - DOCKER_INFLUXDB_INIT_BUCKET=DefaultBucket
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=DefaultToken
+    volumes:
+      - influxdb-storage:/var/lib/influxdb
+
+  chroma:
+    image: chromadb/chroma:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma-storage:/chroma
+
+  chroma-client:
+    image: chroma-client-image
+    ports:
+      - "8888:8888"
+    environment:
+      - CHROMADB_HOST=chroma
+      - CHROMADB_PORT=8000
+      - CHROMADB_COLLECTION=DefaultCollection
+
+volumes:
+  grafana-storage:
+  influxdb-storage:
+  my_sql_data:
+  redis_data:
+  chroma-storage:

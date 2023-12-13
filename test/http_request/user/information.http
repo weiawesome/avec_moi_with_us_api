@@ -1,0 +1,13 @@
+### Information
+GET {{BASE_URL}}/api/v1/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlLCJjc3JmIjoiMzQ1NTgwNWUtOGRlMi00YWQzLWIyMjUtZmI1YWJkNWRlMzgyIiwiaXNzIjoiRGVmYXVsdElzc3VlciIsInN1YiI6IlRjd2VlZWlAZ21haWwuY29tIiwiZXhwIjoxNzAzNjg1NTMyLCJuYmYiOjE3MDI0NzU5MzIsImlhdCI6MTcwMjQ3NTkzMiwianRpIjoiNzk1YjEwYjQtNGE1Mi00MDM4LWFhNDEtZTg1MGMzNTE4NWFlIn0.Ra-DmMPmoPQHhCJfM1d6qd1Hmio2fzXAwaqPb_e9WT8
+
+### Edit Information
+PUT {{BASE_URL}}/api/v1/user/edit_info
+Authorization: Bearer {{EXAMPLE_JWT}}
+Content-Type: application/json
+
+{
+  "name": "{{EXAMPLE_NAME}}",
+  "gender": "{{EXAMPLE_GENDER}}"
+}

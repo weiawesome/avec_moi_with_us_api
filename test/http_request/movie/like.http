@@ -1,0 +1,15 @@
+### Get Like Movies
+GET {{BASE_URL}}/api/v1/movie/like
+Authorization: Bearer {{EXAMPLE_JWT}}
+
+### Get Like Movie Or Not
+GET {{BASE_URL}}/api/v1/movie/like/{{EXAMPLE_UUID}}
+Authorization: Bearer {{EXAMPLE_JWT}}
+
+### Add Like Movie
+POST {{BASE_URL}}/api/v1/movie/like/{{EXAMPLE_UUID}}
+Authorization: Bearer {{EXAMPLE_JWT}}
+
+### Delete Like Movie
+DELETE {{BASE_URL}}/api/v1/movie/like/{{EXAMPLE_UUID}}
+Authorization: Bearer {{EXAMPLE_JWT}}
